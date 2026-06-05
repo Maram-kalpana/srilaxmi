@@ -19,6 +19,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow Towers Employee App to access your microphone for voice work updates."
+        }
+      ],
+      "@react-native-community/datetimepicker"
+    ]
   }
 }
