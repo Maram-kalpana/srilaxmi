@@ -5,10 +5,11 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, TextInput } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import { useApp } from '../context/AppContext';
@@ -16,14 +17,21 @@ import { colors } from '../theme/colors';
 
 export default function LoginScreen() {
   const { login, validateCredentials } = useApp();
+
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
   const handleLogin = () => {
     const nextErrors = {};
-    if (!employeeId.trim()) nextErrors.employeeId = 'Employee ID is required';
-    if (!password) nextErrors.password = 'Password is required';
+
+    if (!employeeId.trim()) {
+      nextErrors.employeeId = 'Employee ID is required';
+    }
+
+    if (!password) {
+      nextErrors.password = 'Password is required';
+    }
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors);
@@ -56,16 +64,19 @@ export default function LoginScreen() {
           bounces={false}
         >
           <View style={styles.header}>
-            <View style={styles.logoCircle}>
-              <MaterialCommunityIcons name="office-building" size={48} color={colors.white} />
-            </View>
-            <Text style={styles.title}>Employee Portal</Text>
-            <Text style={styles.subtitle}>Towers Construction Ltd.</Text>
+            <Image
+              source={require('../../assets/logo.png')}
+              style={styles.logo}
+            />
+            
           </View>
 
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Sign In</Text>
-            <Text style={styles.hint}>Demo: EMP001 / 123456</Text>
+
+            <Text style={styles.hint}>
+              Demo: EMP001 / 123456
+            </Text>
 
             <CustomInput
               label="Employee ID"
@@ -75,6 +86,7 @@ export default function LoginScreen() {
               error={errors.employeeId}
               left={<TextInput.Icon icon="card-account-details" />}
             />
+
             <CustomInput
               label="Password"
               value={password}
@@ -84,7 +96,11 @@ export default function LoginScreen() {
               left={<TextInput.Icon icon="lock" />}
             />
 
-            <CustomButton title="Login" onPress={handleLogin} icon="login" />
+            <CustomButton
+              title="Login"
+              onPress={handleLogin}
+              icon="login"
+            />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -93,54 +109,71 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: colors.primary },
+  flex: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+
   scroll: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: 24,
+    paddingHorizontal: 24,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
+
   header: {
     alignItems: 'center',
-    marginBottom: 28,
+    marginBottom: 10,
+    marginTop: -120,
   },
-  logoCircle: {
-    width: 88,
-    height: 88,
-    borderRadius: 44,
-    backgroundColor: colors.primaryDark,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
+
+  logo: {
+    width: 540,
+    height: 270,
+    resizeMode: 'contain',
+    marginBottom: -85, // pulls Employee Portal closer to logo
   },
   title: {
-    fontSize: 26,
+    fontSize: 34,
     fontWeight: '800',
-    color: colors.white,
+    color: '#0A4EA3',
+    textAlign: 'center',
+    marginTop: -25, // moves title upward
   },
   subtitle: {
-    fontSize: 14,
-    color: colors.primaryLight,
+    fontSize: 16,
+    color: '#4A5568',
+    textAlign: 'center',
     marginTop: 4,
   },
+
   card: {
-    backgroundColor: colors.white,
-    borderRadius: 20,
+    backgroundColor: '#0047AB',
+    borderRadius: 25,
     padding: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 8,
+    marginTop: 5,
+
+    shadowColor: '#0A4EA3',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 20,
+    elevation: 12,
   },
+
   cardTitle: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: '700',
-    color: colors.text,
-    marginBottom: 4,
+    color: '#FFFFFF',
+    marginBottom: 6,
   },
+
   hint: {
-    fontSize: 12,
-    color: colors.textSecondary,
-    marginBottom: 20,
+    fontSize: 14,
+    color: '#D6E4FF',
+    marginBottom: 24,
   },
 });
