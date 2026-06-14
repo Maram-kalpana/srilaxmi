@@ -15,7 +15,12 @@
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.maramkalpana.towersapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -27,7 +32,13 @@
           "microphonePermission": "Allow Towers Employee App to access your microphone for voice work updates."
         }
       ],
-      "@react-native-community/datetimepicker"
-    ]
+      "@react-native-community/datetimepicker",
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ca8a54c6-31ff-4db7-8f81-be53d6f98d8b"
+      }
+    }
   }
 }

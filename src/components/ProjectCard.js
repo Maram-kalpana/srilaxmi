@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text, Card } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors, statusColors } from '../theme/colors';
 
 export default function ProjectCard({ project, onPress }) {
@@ -12,18 +11,21 @@ export default function ProjectCard({ project, onPress }) {
       <Card style={styles.card} mode="elevated">
         <Card.Content>
           <View style={styles.header}>
-            <MaterialCommunityIcons name="office-building" size={28} color={colors.primary} />
+            <Text style={styles.name}>{project.name}</Text>
+
             <View
-              style={[styles.badge, { backgroundColor: statusColor + '22', borderColor: statusColor }]}
+              style={[
+                styles.badge,
+                {
+                  backgroundColor: statusColor + '22',
+                  borderColor: statusColor,
+                },
+              ]}
             >
-              <Text style={[styles.badgeText, { color: statusColor }]}>{project.status}</Text>
+              <Text style={[styles.badgeText, { color: statusColor }]}>
+                {project.status}
+              </Text>
             </View>
-          </View>
-          <Text style={styles.name}>{project.name}</Text>
-          <Text style={styles.code}>{project.code}</Text>
-          <View style={styles.row}>
-            <MaterialCommunityIcons name="account-tie" size={16} color={colors.textSecondary} />
-            <Text style={styles.client}>{project.client}</Text>
           </View>
         </Card.Content>
       </Card>
@@ -42,7 +44,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+  },
+  name: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.text,
+    marginRight: 10,
   },
   badge: {
     paddingHorizontal: 10,
@@ -53,25 +61,5 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: 12,
     fontWeight: '600',
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 4,
-  },
-  code: {
-    fontSize: 13,
-    color: colors.textSecondary,
-    marginBottom: 8,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  client: {
-    fontSize: 14,
-    color: colors.textSecondary,
   },
 });
